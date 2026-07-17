@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Detalhes Polimento - Delart{% endblock %}
+{% block content %}
+<div class="detalhes">
+    <div class="page-header">
+        <h1>Detalhes do Polimento</h1>
+        <a href="{{ url_for('polimentos_listar') }}" class="btn btn-secondary">Voltar</a>
+    </div>
+    <div class="detalhes-card">
+        <p><strong>Veículo:</strong> {{ polimento.veiculo }}</p>
+        <p><strong>Placa:</strong> {{ polimento.placa }}</p>
+        <p><strong>Tipo:</strong> {{ polimento.tipo }}</p>
+        <p><strong>Data Agendada:</strong> {{ polimento.data_agendada }}</p>
+        <p><strong>Status:</strong> <span class="status-badge status-{{ polimento.status|lower }}">{{ polimento.status }}</span></p>
+        <p><strong>Observações:</strong> {{ polimento.observacoes or '—' }}</p>
+        <p><strong>Cliente:</strong> {{ polimento.usuario.nome }}</p>
+    </div>
+    <div class="form-actions">
+        <a href="{{ url_for('polimentos_editar', id=polimento.id) }}" class="btn">Editar</a>
+    </div>
+</div>
+{% endblock %}

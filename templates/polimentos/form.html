@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ acao }} Polimento - Delart{% endblock %}
+{% block content %}
+<div class="auth">
+    <h1>{{ acao }} Polimento</h1>
+    <form method="POST">
+        <label>Veículo
+            <input type="text" name="veiculo" value="{{ polimento.veiculo if polimento else '' }}" required>
+        </label>
+        <label>Placa
+            <input type="text" name="placa" value="{{ polimento.placa if polimento else '' }}" required>
+        </label>
+        <label>Tipo de Polimento
+            <select name="tipo" required>
+                <option value="">Selecione...</option>
+                {% set t = polimento.tipo if polimento else '' %}
+                <option {{ 'selected' if t == 'Tecnico' else '' }}>Tecnico</option>
+                <option {{ 'selected' if t == 'Cristal' else '' }}>Cristal</option>
+                <option {{ 'selected' if t == 'Revitalizacao' else '' }}>Revitalizacao</option>
+                <option {{ 'selected' if t == 'Vitrificacao' else '' }}>Vitrificacao</option>
+            </select>
+        </label>
+        <label>Data Agendada
+            <input type="date" name="data_agendada" value="{{ polimento.data_agendada if polimento else '' }}" required>
+        </label>
+        <label>Status
+            <select name="status">
+                {% set s = polimento.status if polimento else 'Pendente' %}
+                <option {{ 'selected' if s == 'Pendente' else '' }}>Pendente</option>
+                <option {{ 'selected' if s == 'Em andamento' else '' }}>Em andamento</option>
+                <option {{ 'selected' if s == 'Concluido' else '' }}>Concluido</option>
+                <option {{ 'selected' if s == 'Cancelado' else '' }}>Cancelado</option>
+            </select>
+        </label>
+        <label>Observações
+            <textarea name="observacoes" rows="3">{{ polimento.observacoes if polimento else '' }}</textarea>
+        </label>
+        <div class="form-actions">
+            <button type="submit" class="btn">Salvar</button>
+            <a href="{{ url_for('polimentos_listar') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
