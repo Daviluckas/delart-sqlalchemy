@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Delart Estética Automotiva{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo-placeholder">◆</span>
+            <span>Delart Estética Automotiva</span>
+        </div>
+        <ul class="nav-links">
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('painel') }}">Painel</a></li>
+                <li><a href="{{ url_for('lavagens_listar') }}">Lavagens</a></li>
+                <li><a href="{{ url_for('polimentos_listar') }}">Polimentos</a></li>
+                <li><a href="{{ url_for('restauracoes_listar') }}">Restaurações</a></li>
+                <li class="user-name">Olá, {{ current_user.nome }}</li>
+                <li><a href="{{ url_for('logout') }}" class="btn-logout">Sair</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Entrar</a></li>
+                <li><a href="{{ url_for('registro') }}">Cadastrar</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for categoria, msg in messages %}
+                    <div class="flash {{ categoria }}">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Delart Estética Automotiva &copy; 2026</p>
+    </footer>
+</body>
+</html>
