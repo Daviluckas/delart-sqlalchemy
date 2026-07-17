@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ acao }} Lavagem - Delart{% endblock %}
+{% block content %}
+<div class="auth">
+    <h1>{{ acao }} Lavagem</h1>
+    <form method="POST">
+        <label>Veículo
+            <input type="text" name="veiculo" value="{{ lavagem.veiculo if lavagem else '' }}" required>
+        </label>
+        <label>Placa
+            <input type="text" name="placa" value="{{ lavagem.placa if lavagem else '' }}" required>
+        </label>
+        <label>Tipo de Lavagem
+            <select name="tipo" required>
+                <option value="">Selecione...</option>
+                {% set t = lavagem.tipo if lavagem else '' %}
+                <option {{ 'selected' if t == 'Simples' else '' }}>Simples</option>
+                <option {{ 'selected' if t == 'Completa' else '' }}>Completa</option>
+                <option {{ 'selected' if t == 'Detalhada' else '' }}>Detalhada</option>
+                <option {{ 'selected' if t == 'Ecologica' else '' }}>Ecológica</option>
+            </select>
+        </label>
+        <label>Data Agendada
+            <input type="date" name="data_agendada" value="{{ lavagem.data_agendada if lavagem else '' }}" required>
+        </label>
+        <label>Status
+            <select name="status">
+                {% set s = lavagem.status if lavagem else 'Pendente' %}
+                <option {{ 'selected' if s == 'Pendente' else '' }}>Pendente</option>
+                <option {{ 'selected' if s == 'Em andamento' else '' }}>Em andamento</option>
+                <option {{ 'selected' if s == 'Concluido' else '' }}>Concluido</option>
+                <option {{ 'selected' if s == 'Cancelado' else '' }}>Cancelado</option>
+            </select>
+        </label>
+        <label>Observações
+            <textarea name="observacoes" rows="3">{{ lavagem.observacoes if lavagem else '' }}</textarea>
+        </label>
+        <div class="form-actions">
+            <button type="submit" class="btn">Salvar</button>
+            <a href="{{ url_for('lavagens_listar') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

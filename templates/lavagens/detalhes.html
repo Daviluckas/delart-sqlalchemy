@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Detalhes Lavagem - Delart{% endblock %}
+{% block content %}
+<div class="detalhes">
+    <div class="page-header">
+        <h1>Detalhes da Lavagem</h1>
+        <a href="{{ url_for('lavagens_listar') }}" class="btn btn-secondary">Voltar</a>
+    </div>
+    <div class="detalhes-card">
+        <p><strong>Veículo:</strong> {{ lavagem.veiculo }}</p>
+        <p><strong>Placa:</strong> {{ lavagem.placa }}</p>
+        <p><strong>Tipo:</strong> {{ lavagem.tipo }}</p>
+        <p><strong>Data Agendada:</strong> {{ lavagem.data_agendada }}</p>
+        <p><strong>Status:</strong> <span class="status-badge status-{{ lavagem.status|lower }}">{{ lavagem.status }}</span></p>
+        <p><strong>Observações:</strong> {{ lavagem.observacoes or '—' }}</p>
+        <p><strong>Cliente:</strong> {{ lavagem.usuario.nome }}</p>
+    </div>
+    <div class="form-actions">
+        <a href="{{ url_for('lavagens_editar', id=lavagem.id) }}" class="btn">Editar</a>
+    </div>
+</div>
+{% endblock %}
