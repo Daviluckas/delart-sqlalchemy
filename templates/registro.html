@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Cadastro - Delart{% endblock %}
+{% block content %}
+<div class="auth">
+    <h1>Cadastro de Usuário</h1>
+    <form method="POST" action="{{ url_for('registro') }}">
+        <label>Nome de usuário
+            <input type="text" name="nome" required autofocus>
+        </label>
+        <label>Senha
+            <input type="password" name="senha" required>
+        </label>
+        <button type="submit" class="btn">Cadastrar</button>
+    </form>
+    <p class="link-abaixo">Já tem conta? <a href="{{ url_for('login') }}">Entrar</a></p>
+</div>
+{% endblock %}

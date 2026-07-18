@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Painel - Delart{% endblock %}
+{% block content %}
+<div class="painel">
+    <h1>Painel</h1>
+    <p>Olá <strong>{{ current_user.nome }}</strong>, escolha uma opção abaixo:</p>
+    <div class="cards">
+        <a href="{{ url_for('lavagens_listar') }}" class="card card-link">
+            <h3>Lavagens</h3>
+            <p>Gerenciar agendamentos de lavagem</p>
+        </a>
+        <a href="{{ url_for('polimentos_listar') }}" class="card card-link">
+            <h3>Polimentos</h3>
+            <p>Gerenciar agendamentos de polimento</p>
+        </a>
+        <a href="{{ url_for('restauracoes_listar') }}" class="card card-link">
+            <h3>Restaurações</h3>
+            <p>Gerenciar agendamentos de restauração</p>
+        </a>
+    </div>
+</div>
+{% endblock %}

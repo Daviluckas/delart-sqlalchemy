@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Delart Estética Automotiva - Início{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>Bem-vindo à <span class="accent">Delart</span></h1>
+    <p class="subtitle">Estética Automotiva — Lavagem, Polimento e Restauração</p>
+    <div class="hero-actions">
+        <a href="{{ url_for('login') }}" class="btn">Entrar</a>
+        <a href="{{ url_for('registro') }}" class="btn btn-secondary">Cadastrar</a>
+    </div>
+</div>
+<div class="cards">
+    <div class="card">
+        <h3>Lavagem</h3>
+        <p>Agende lavagens simples, completas ou detalhadas.</p>
+    </div>
+    <div class="card">
+        <h3>Polimento</h3>
+        <p>Polimento técnico e revitalização de pintura.</p>
+    </div>
+    <div class="card">
+        <h3>Restauração</h3>
+        <p>Restauração de faróis, interior e para-choques.</p>
+    </div>
+</div>
+{% endblock %}

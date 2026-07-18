@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Restaurações - Delart{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1>Agendamentos de Restauração</h1>
+    <a href="{{ url_for('restauracoes_nova') }}" class="btn">+ Nova Restauração</a>
+</div>
+
+<div class="filter-bar">
+    <form method="GET" action="{{ url_for('restauracoes_listar') }}">
+        <input type="text" name="q" value="{{ q }}" placeholder="Buscar por veículo...">
+        <button type="submit" class="btn btn-secondary">Filtrar</button>
+        {% if q %}<a href="{{ url_for('restauracoes_listar') }}" class="btn-link">limpar</a>{% endif %}
+    </form>
+</div>
+
+{% if restauracoes %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Veículo</th><th>Placa</th><th>Tipo</th><th>Data</th><th>Status</th><th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for r in restauracoes %}
+        <tr>
+            <td>{{ r.veiculo }}</td>
+            <td>{{ r.placa }}</td>
+            <td>{{ r.tipo }}</td>
+            <td>{{ r.data_agendada }}</td>
+            <td><span class="status-badge status-{{ r.status|lower }}">{{ r.status }}</span></td>
+            <td class="acoes">
+                <a href="{{ url_for('restauracoes_detalhes', id=r.id) }}" class="btn-link">Ver</a>
+                <a href="{{ url_for('restauracoes_editar', id=r.id) }}" class="btn-link">Editar</a>
+                <form method="POST" action="{{ url_for('restauracoes_remover', id=r.id) }}" onsubmit="return confirm('Remover este agendamento?')">
+                    <button type="submit" class="btn-link danger">Remover</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="empty">Nenhum agendamento de restauração encontrado.</p>
+{% endif %}
+{% endblock %}

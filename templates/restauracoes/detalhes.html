@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Detalhes Restauração - Delart{% endblock %}
+{% block content %}
+<div class="detalhes">
+    <div class="page-header">
+        <h1>Detalhes da Restauração</h1>
+        <a href="{{ url_for('restauracoes_listar') }}" class="btn btn-secondary">Voltar</a>
+    </div>
+    <div class="detalhes-card">
+        <p><strong>Veículo:</strong> {{ restauracao.veiculo }}</p>
+        <p><strong>Placa:</strong> {{ restauracao.placa }}</p>
+        <p><strong>Tipo:</strong> {{ restauracao.tipo }}</p>
+        <p><strong>Data Agendada:</strong> {{ restauracao.data_agendada }}</p>
+        <p><strong>Status:</strong> <span class="status-badge status-{{ restauracao.status|lower }}">{{ restauracao.status }}</span></p>
+        <p><strong>Observações:</strong> {{ restauracao.observacoes or '—' }}</p>
+        <p><strong>Cliente:</strong> {{ restauracao.usuario.nome }}</p>
+    </div>
+    <div class="form-actions">
+        <a href="{{ url_for('restauracoes_editar', id=restauracao.id) }}" class="btn">Editar</a>
+    </div>
+</div>
+{% endblock %}

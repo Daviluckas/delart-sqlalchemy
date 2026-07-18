@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ acao }} Restauração - Delart{% endblock %}
+{% block content %}
+<div class="auth">
+    <h1>{{ acao }} Restauração</h1>
+    <form method="POST">
+        <label>Veículo
+            <input type="text" name="veiculo" value="{{ restauracao.veiculo if restauracao else '' }}" required>
+        </label>
+        <label>Placa
+            <input type="text" name="placa" value="{{ restauracao.placa if restauracao else '' }}" required>
+        </label>
+        <label>Tipo de Restauração
+            <select name="tipo" required>
+                <option value="">Selecione...</option>
+                {% set t = restauracao.tipo if restauracao else '' %}
+                <option {{ 'selected' if t == 'Farol' else '' }}>Farol</option>
+                <option {{ 'selected' if t == 'Interior' else '' }}>Interior</option>
+                <option {{ 'selected' if t == 'Para-choque' else '' }}>Para-choque</option>
+                <option {{ 'selected' if t == 'Pintura' else '' }}>Pintura</option>
+            </select>
+        </label>
+        <label>Data Agendada
+            <input type="date" name="data_agendada" value="{{ restauracao.data_agendada if restauracao else '' }}" required>
+        </label>
+        <label>Status
+            <select name="status">
+                {% set s = restauracao.status if restauracao else 'Pendente' %}
+                <option {{ 'selected' if s == 'Pendente' else '' }}>Pendente</option>
+                <option {{ 'selected' if s == 'Em andamento' else '' }}>Em andamento</option>
+                <option {{ 'selected' if s == 'Concluido' else '' }}>Concluido</option>
+                <option {{ 'selected' if s == 'Cancelado' else '' }}>Cancelado</option>
+            </select>
+        </label>
+        <label>Observações
+            <textarea name="observacoes" rows="3">{{ restauracao.observacoes if restauracao else '' }}</textarea>
+        </label>
+        <div class="form-actions">
+            <button type="submit" class="btn">Salvar</button>
+            <a href="{{ url_for('restauracoes_listar') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
